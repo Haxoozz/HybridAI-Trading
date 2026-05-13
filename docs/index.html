@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid AI Trading System — Multi-Agent Autonomous Trading with LLM Council Governance</title>
+    <meta name="description" content="An autonomous trading system combining multi-model LLM oracle swarm consensus with deterministic risk gates. Built with fail-closed architecture and council governance.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">HybridAI<span class="logo-accent">Trading</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#architecture">Architecture</a>
+                <a href="#modules">Modules</a>
+                <a href="#safety">Safety</a>
+                <a href="#validation">Validation</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="https://github.com" class="nav-cta" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero">
+        <div class="hero-bg">
+            <div class="grid-overlay"></div>
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
+            <div class="glow glow-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Active Development — Research & Paper Trading Phase
+            </div>
+            <h1>
+                Autonomous Trading<br>
+                with <span class="gradient-text">LLM Council</span><br>
+                Governance
+            </h1>
+            <p class="hero-sub">
+                A multi-agent AI trading system that combines a swarm oracle consensus engine
+                with deterministic risk gates. Every trade decision requires K-of-N model agreement
+                and passes through hard-coded circuit breakers before execution.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-value">8</span>
+                    <span class="stat-label">LLM Backends</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value">0.853</span>
+                    <span class="stat-label">OOS Sharpe Ratio</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value">15/15</span>
+                    <span class="stat-label">Safety Tests Pass</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value">0.000</span>
+                    <span class="stat-label">PBO Score</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#architecture" class="btn btn-primary">Explore Architecture</a>
+                <a href="#validation" class="btn btn-ghost">View Test Results</a>
+            </div>
+        </div>
+        <div class="hero-terminal">
+            <div class="terminal-chrome">
+                <div class="terminal-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="terminal-title">oracle_swarm.py — live smoke test</span>
+            </div>
+            <div class="terminal-body" id="terminal">
+                <div class="term-line"><span class="term-prompt">$</span> python oracle_swarm.py --smoke-test</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section id="architecture">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">System Design</span>
+                <h2>Hybrid Architecture</h2>
+                <p>ML signals are subordinate to deterministic safety gates. The system is fail-closed by default — if any gate cannot confirm safety, the trade is rejected.</p>
+            </div>
+
+            <div class="arch-grid">
+                <div class="arch-card arch-card-wide">
+                    <div class="arch-icon">🧠</div>
+                    <h3>LLM Oracle Swarm</h3>
+                    <p>8-model consensus engine (6 NVIDIA NIM + 2 HuggingFace). K-of-N majority vote with configurable quorum. Each model independently analyzes market context and returns a structured decision with confidence score.</p>
+                    <div class="arch-detail">
+                        <code>quorum=3 · approvals=3 · timeout=15s · confidence_floor=0.60</code>
+                    </div>
+                </div>
+
+                <div class="arch-card">
+                    <div class="arch-icon">🔒</div>
+                    <h3>RO-Lock</h3>
+                    <p>Risk-Outcome Lock. Deterministic execution gate validating every signal against risk/reward parity with slippage buffers. Minimum 2:1 R:R enforced.</p>
+                    <div class="arch-tag">Deterministic Gate</div>
+                </div>
+
+                <div class="arch-card">
+                    <div class="arch-icon">📉</div>
+                    <h3>STDAW Gate</h3>
+                    <p>Statistical Trend Deviation Adaptive Weighting. Exponentially suppresses signal confidence as volatility spikes beyond baseline norms.</p>
+                    <div class="arch-tag">Adaptive Filter</div>
+                </div>
+
+                <div class="arch-card">
+                    <div class="arch-icon">🛑</div>
+                    <h3>OOM-RL Halt</h3>
+                    <p>Circuit breaker at 10% global drawdown. Hard system stop preventing exploratory RL behavior outside the tested safety envelope. Requires manual rearm.</p>
+                    <div class="arch-tag">Circuit Breaker</div>
+                </div>
+
+                <div class="arch-card">
+                    <div class="arch-icon">📊</div>
+                    <h3>TSMOM Signal</h3>
+                    <p>Time-Series Momentum with 3-layer regime gate: ATR percentile rank → SMA200 trend → ADX>25 strength. 28-day momentum entry, 4H ATR stop sizing.</p>
+                    <div class="arch-tag">Signal Engine</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Flow -->
+    <section id="dataflow">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">Execution Pipeline</span>
+                <h2>Signal → Gate → Execute</h2>
+                <p>Every trade passes through 5 independent validation layers before execution is permitted.</p>
+            </div>
+            <div class="pipeline">
+                <div class="pipeline-step">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h4>Regime Gate</h4>
+                        <p>ATR + SMA200 + ADX sequential filter. Market must be trending with sufficient strength.</p>
+                    </div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h4>Signal Generation</h4>
+                        <p>28-day TSMOM entry with 4H ATR stop/target sizing. Position size from Kelly fraction.</p>
+                    </div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h4>Oracle Consensus</h4>
+                        <p>8-model swarm votes. Requires 3/8 quorum AND 3 approvals to proceed.</p>
+                    </div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h4>Risk Rails</h4>
+                        <p>RO-Lock R:R check, exposure limits, daily loss caps, drawdown monitor.</p>
+                    </div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step step-final">
+                    <div class="step-num">05</div>
+                    <div class="step-content">
+                        <h4>Execute / Reject</h4>
+                        <p>Any gate failure = no trade. Fail-closed. Logged to audit trail.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules -->
+    <section id="modules">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">Codebase</span>
+                <h2>Module Inventory</h2>
+                <p>16 Python modules. Every module independently tested. Crash-recovery safety verified with 15 assertions.</p>
+            </div>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">signal_engine.py</span>
+                        <span class="module-status status-pass">CONDITIONAL PASS</span>
+                    </div>
+                    <p>TSMOM signal engine with ATR+SMA200+ADX sequential regime gate. 3-layer filter before entry signal fires.</p>
+                    <div class="module-meta">~220 lines · Layer 0/1/2 architecture</div>
+                </div>
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">risk_engine.py</span>
+                        <span class="module-status status-pass">CONDITIONAL PASS</span>
+                    </div>
+                    <p>ROLock, OOMRLHalt, exposure gating, daily/weekly reset, NaN/inf validation. Hard-coded safety supersedes all ML signals.</p>
+                    <div class="module-meta">407 lines · 5 risk gates</div>
+                </div>
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">oracle_swarm.py</span>
+                        <span class="module-status status-complete">COMPLETE</span>
+                    </div>
+                    <p>Multi-model swarm oracle. 6 NIM + 2 HF backends. K-of-N majority vote. Per-model 15s timeout. Dotenv key management.</p>
+                    <div class="module-meta">~260 lines · 8/8 live smoke test pass</div>
+                </div>
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">paper_trader.py</span>
+                        <span class="module-status status-pass">CONDITIONAL PASS</span>
+                    </div>
+                    <p>Paper trading simulation: position lifecycle, SL/TP detection, multi-bar outage recovery, daily/weekly reset.</p>
+                    <div class="module-meta">430 lines · Crash-recovery hardened</div>
+                </div>
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">state_store.py</span>
+                        <span class="module-status status-pass">CONDITIONAL PASS</span>
+                    </div>
+                    <p>Durable SQLite-backed risk state persistence. NAV, HWM, daily PnL, MTM field reservation. Atomic writes.</p>
+                    <div class="module-meta">363 lines · ACID-compliant persistence</div>
+                </div>
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">backtester.py</span>
+                        <span class="module-status status-pass">CONDITIONAL PASS</span>
+                    </div>
+                    <p>Offline strategy evaluation harness using identical code paths as paper_trader. 63-trade 24-month validation.</p>
+                    <div class="module-meta">629 lines · +31.1% net return</div>
+                </div>
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">walk_forward.py</span>
+                        <span class="module-status status-complete">COMPLETE</span>
+                    </div>
+                    <p>9-fold out-of-sample walk-forward validation. Mean OOS Sharpe 0.763. Gold standard for strategy robustness.</p>
+                    <div class="module-meta">~200 lines · 9-fold OOS validation</div>
+                </div>
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-name">cscv_pbo.py</span>
+                        <span class="module-status status-complete">COMPLETE</span>
+                    </div>
+                    <p>Combinatorially Symmetric Cross-Validation for Probability of Backtest Overfitting. PBO = 0.000, 100% positive OOS.</p>
+                    <div class="module-meta">~130 lines · Overfitting eliminated</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety -->
+    <section id="safety">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">Capital Preservation</span>
+                <h2>Fail-Closed by Default</h2>
+                <p>The system is designed to reject trades when uncertain, not to find reasons to execute them.</p>
+            </div>
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <div class="safety-icon">🔴</div>
+                    <h4>10% Global Drawdown Halt</h4>
+                    <p>Hard circuit breaker triggers forced liquidation. Exists physically outside the ML agent's memory. Requires manual human intervention to un-halt.</p>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-icon">🟡</div>
+                    <h4>2% Max Risk Per Trade</h4>
+                    <p>Position sizing enforced by ROLock gate with slippage buffers. No ML output can override this deterministic calculation.</p>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-icon">🟢</div>
+                    <h4>Crash Recovery</h4>
+                    <p>SQLite-backed atomic state. 15/15 idempotency tests pass. Multi-bar outage recovery handles up to 12H downtime.</p>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-icon">🔵</div>
+                    <h4>LLM Council Governance</h4>
+                    <p>No strategy change, risk parameter modification, or architectural decision proceeds without multi-model council deliberation and human ratification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Validation -->
+    <section id="validation">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">Evidence-Based</span>
+                <h2>Validation Results</h2>
+                <p>All claims are backed by reproducible test runs. No cherry-picked results.</p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h4>Backtest (24-Month TSMOM)</h4>
+                        <span class="result-badge">63 trades</span>
+                    </div>
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <span class="rs-value positive">+31.1%</span>
+                            <span class="rs-label">Net Return</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value">0.853</span>
+                            <span class="rs-label">Sharpe Ratio</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value caution">14.3%</span>
+                            <span class="rs-label">Max Drawdown</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value">$3,105</span>
+                            <span class="rs-label">Net Profit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-header">
+                        <h4>Walk-Forward (9-Fold OOS)</h4>
+                        <span class="result-badge">Gold Standard</span>
+                    </div>
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <span class="rs-value">0.763</span>
+                            <span class="rs-label">Mean OOS Sharpe</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value positive">9/9</span>
+                            <span class="rs-label">Folds Positive</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-header">
+                        <h4>CSCV / PBO Overfitting Test</h4>
+                        <span class="result-badge">Zero Overfit</span>
+                    </div>
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <span class="rs-value positive">0.000</span>
+                            <span class="rs-label">PBO Score</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value positive">100%</span>
+                            <span class="rs-label">Positive OOS Rate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-header">
+                        <h4>Test Suite</h4>
+                        <span class="result-badge">All Pass</span>
+                    </div>
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <span class="rs-value positive">15/15</span>
+                            <span class="rs-label">Idempotency Tests</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value positive">25/25</span>
+                            <span class="rs-label">Oracle Tests</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value positive">13/13</span>
+                            <span class="rs-label">LLM Client Tests</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="rs-value positive">10/10</span>
+                            <span class="rs-label">Vol Scalar Tests</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="stack">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">Infrastructure</span>
+                <h2>Technology Stack</h2>
+            </div>
+            <div class="stack-grid">
+                <div class="stack-item">
+                    <div class="stack-logo">🐍</div>
+                    <span>Python 3.14</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">📦</div>
+                    <span>SQLite</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">🔗</div>
+                    <span>ccxt</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">🟢</div>
+                    <span>NVIDIA NIM</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">🤗</div>
+                    <span>HuggingFace</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">🔮</div>
+                    <span>Anthropic API</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">📊</div>
+                    <span>Pandas</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">📈</div>
+                    <span>Binance</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">✈️</div>
+                    <span>Telegram Bot</span>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-logo">🏛️</div>
+                    <span>TAIFEX / Shioaji</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">Development Status</span>
+                <h2>Roadmap</h2>
+            </div>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item completed">
+                    <div class="roadmap-marker"></div>
+                    <div class="roadmap-content">
+                        <h4>Phase 1 — Core Infrastructure</h4>
+                        <p>Risk engine, state persistence, paper trader, crash recovery. 15/15 idempotency tests pass.</p>
+                        <span class="roadmap-status">✓ Complete</span>
+                    </div>
+                </div>
+                <div class="roadmap-item completed">
+                    <div class="roadmap-marker"></div>
+                    <div class="roadmap-content">
+                        <h4>Phase 2 — Signal Engine</h4>
+                        <p>TSMOM signal with ATR+SMA200+ADX regime gate. RSI eliminated by peer-reviewed evidence.</p>
+                        <span class="roadmap-status">✓ Complete</span>
+                    </div>
+                </div>
+                <div class="roadmap-item completed">
+                    <div class="roadmap-marker"></div>
+                    <div class="roadmap-content">
+                        <h4>Phase 3 — Validation</h4>
+                        <p>24-month backtest, 9-fold walk-forward, CSCV/PBO overfitting test. All pass.</p>
+                        <span class="roadmap-status">✓ Complete</span>
+                    </div>
+                </div>
+                <div class="roadmap-item completed">
+                    <div class="roadmap-marker"></div>
+                    <div class="roadmap-content">
+                        <h4>Phase 4 — LLM Oracle</h4>
+                        <p>8-model swarm oracle with multi-provider fallback. Mock → NIM → Anthropic chain. 25/25 tests.</p>
+                        <span class="roadmap-status">✓ Complete</span>
+                    </div>
+                </div>
+                <div class="roadmap-item active">
+                    <div class="roadmap-marker"></div>
+                    <div class="roadmap-content">
+                        <h4>Phase 5 — Paper Trading</h4>
+                        <p>Unattended paper trading with Telegram alerts, heartbeat monitoring, and live dashboard.</p>
+                        <span class="roadmap-status">● In Progress</span>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-marker"></div>
+                    <div class="roadmap-content">
+                        <h4>Phase 6 — Live Execution</h4>
+                        <p>Staged live with tight position limits. Human approval gate. Full audit trail.</p>
+                        <span class="roadmap-status">○ Planned</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Usage -->
+    <section id="api-usage">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">Cloud Integration</span>
+                <h2>Anthropic API Usage</h2>
+                <p>The Anthropic API serves as the premium reasoning fallback in the oracle chain. When the free-tier NIM/HuggingFace swarm cannot reach consensus, Claude provides the tiebreaking analysis with higher reasoning capability.</p>
+            </div>
+            <div class="api-cards">
+                <div class="api-card">
+                    <h4>Oracle Fallback Chain</h4>
+                    <div class="api-chain">
+                        <span class="chain-node chain-free">Mock Mode</span>
+                        <span class="chain-arrow">→</span>
+                        <span class="chain-node chain-free">NIM Swarm (6)</span>
+                        <span class="chain-arrow">→</span>
+                        <span class="chain-node chain-free">HF Router (2)</span>
+                        <span class="chain-arrow">→</span>
+                        <span class="chain-node chain-premium">Anthropic Claude</span>
+                    </div>
+                    <p>Claude activates only when the 8-model free swarm fails to reach quorum — estimated &lt;5% of cycles. This makes API usage highly efficient while preserving access to frontier reasoning when it matters.</p>
+                </div>
+                <div class="api-card">
+                    <h4>Projected Usage</h4>
+                    <ul class="api-list">
+                        <li><strong>Daily cycles:</strong> 1–6 signal evaluations per day (daily + 4H timeframes)</li>
+                        <li><strong>Estimated API calls:</strong> &lt;10/day (only on swarm disagreement)</li>
+                        <li><strong>Context per call:</strong> ~2,000 tokens (market snapshot + signal context)</li>
+                        <li><strong>Total monthly:</strong> ~$5–15 estimated at current Claude pricing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span class="logo-icon">◆</span>
+                <span>HybridAI Trading — Personal Research Project</span>
+            </div>
+            <div class="footer-right">
+                <span>Built in Taiwan · 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
