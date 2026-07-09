@@ -1,0 +1,26 @@
+{
+  "name": "hybridai-trading",
+  "version": "0.1.0",
+  "description": "HybridAI Trading — TypeScript project",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "watch": "tsx watch src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Haxoozz/HybridAI-Trading.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2"
+  },
+  "type": "module"
+}
