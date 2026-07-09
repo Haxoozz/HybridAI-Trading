@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "polymarket-arbitrage-trading-bot": {
+      "source": "aradotso/trending-skills",
+      "sourceType": "github",
+      "skillPath": "skills/polymarket-arbitrage-trading-bot/SKILL.md",
+      "computedHash": "80002a8f0974a49f61686f19230608e44b129bdbb75205df61ba526e4406760c"
+    }
+  }
+}
